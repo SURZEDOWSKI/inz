@@ -1,0 +1,21 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "card_full"
+    },
+    {
+      "id": 1,
+      "name": "card_min"
+    },
+    {
+      "id": 2,
+      "name": "card_roll"
+    }
+  ],
+  "info": {
+    "year": 2022,
+    "version": "1.0",
+    "contributor": "Label Studio"
+  }
+}
