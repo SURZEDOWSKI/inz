@@ -1,3 +1,0 @@
-card_full
-card_min
-card_roll

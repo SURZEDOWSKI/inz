@@ -1,0 +1,5 @@
+train: ../dataset/train/images
+val: ../dataset/val/images
+
+nc: 3
+names: ['card_full', 'card_min', 'card_roll']
