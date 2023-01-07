@@ -89,7 +89,12 @@ def main(img_path=None, vid_path=None):
         results = detect_cards(frame, model=model)
         final_product = print_text(results, frame)
         # print(final_product)
-        return final_product
+        found_links, found_values = find_player_by_name(
+                    dictionary_links_values, links_list, *final_product
+                )
+        print(found_links, found_values)
+        #return final_product
+        return found_links, found_values
 
     elif vid_path is not None:
 
@@ -102,6 +107,8 @@ def main(img_path=None, vid_path=None):
         frame_no = 1
 
         cv2.namedWindow("vid_out", cv2.WINDOW_NORMAL)
+        final_links=[]
+        final_prices=[] 
         final_product = []
         while True:
             ret, frame = cap.read()
@@ -111,12 +118,17 @@ def main(img_path=None, vid_path=None):
                 results = detect_cards(frame, model=model)
 
                 final_product = print_text(results, frame)
-                print(final_product)
+                #print(final_product)
 
                 found_links, found_values = find_player_by_name(
                     dictionary_links_values, links_list, *final_product
                 )
                 print(found_links, found_values)
+                if len(found_links) is not 0:
+                    for i in range(len(found_links)):
+                        if found_links[i] not in final_links:
+                            final_links.append(found_links[i])
+                            final_prices.append(found_values[i])
                 # if len(found_text) is not 0:
                 #    for i in range(len(found_text)):
                 #        operation_text = found_text[i]
@@ -134,27 +146,26 @@ def main(img_path=None, vid_path=None):
 
         ## closing all windows
         cv2.destroyAllWindows()
-        return final_product
+        return final_links, final_prices
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
 
-    # main(vid_path=0)
-    # main(img_path="C:/Users/Wazon/Desktop/code/python/inz/dataset/val/images/34d47d2c-Zrzut_ekranu_2022-12-12_221430.png")
     dictionary_links_values, links_list = scrape_prices_from_pages(10)
-    final_product = main(vid_path=0)
-    #final_product = main(
+    final_links, final_prices = main(vid_path=0)
+    #final_links, final_prices = main(
     #   img_path="C:/Users/Wazon/Desktop/code/python/inz/dataset/val/images/34d47d2c-Zrzut_ekranu_2022-12-12_221430.png"
     #)
-    print(final_product)
+    #print(final_product)
     # for item in range(len(final_product)):
     #    found_links, found_values = find_player_by_name(dictionary_links_values, links_list, final_product[item])
     #    if found_links is not None:
     #        print(found_links[0], found_values[0])
-    found_links, found_values = find_player_by_name(
-        dictionary_links_values, links_list, *final_product
-    )
-    print(found_links, found_values)
+        #found_links, found_values = find_player_by_name(
+        #    dictionary_links_values, links_list, *final_product
+        #)
+    print(final_links, final_prices)
 
 
 # main(vid_path=0)
+"""
