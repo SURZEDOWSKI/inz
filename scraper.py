@@ -5,11 +5,19 @@ import time
 
 
 def scrape_prices_from_page_num(
-    page_num,
+    page_num, sort
 ):  # scrapes prices and names from page of given number
-    page_url = (
-        f"https://www.futwiz.com/en/fifa23/players?page={page_num}&release=nifgold"
-    )
+    if sort == 1:
+        page_url = (
+            f"https://www.futwiz.com/en/fifa23/players?page={page_num}&release=nifgold"
+        )
+    elif sort == 2:
+        page_url = f"https://www.futwiz.com/en/fifa23/players?page={page_num}&release=nifgold&order=bin&s=desc"
+
+    # page_url = (
+    #    f"https://www.futwiz.com/en/fifa23/players?page={page_num}&release=nifgold&order=bin&s=desc"
+    #    #f"https://www.futwiz.com/en/fifa23/players?page={page_num}&release=nifgold"
+    # )
     req = Request(url=page_url, headers={"User-Agent": "Mozilla/5.0"})
     webpage = urlopen(req).read()
 
@@ -57,13 +65,13 @@ def scrape_prices_from_page_num(
 
 
 def scrape_prices_from_pages(
-    pages,
+    pages, sort
 ):  # concatenates dictionaries od link: price pairs and a list of links
     dictionary_links_values = {}
     links_list = []
     for num in range(pages):
         print("SCRAPING FROM PAGE ", num)
-        dictionary_links_values_one_page, links = scrape_prices_from_page_num(num)
+        dictionary_links_values_one_page, links = scrape_prices_from_page_num(num, sort)
         dictionary_links_values.update(dictionary_links_values_one_page)
         if links_list is None:
             links_list = list
@@ -91,7 +99,8 @@ def find_player_by_name(
     for name in names:
         # print(name, type(name))
         if name is None:
-            return found_links, found_values
+            # return found_links, found_values
+            continue
         name = name.lower()
 
         link = list(filter(lambda x: name in x, links_list))
@@ -103,11 +112,13 @@ def find_player_by_name(
         # print(link, type(link))
         # print(value, type(value))
 
-        if len(link) is not 0:
-            found_links.append(link[0])
+        if len(link) != 0:
+            for i in range(len(link)):
+                found_links.append(link[i])
 
-        if len(value) is not 0:
-            found_values.append(value[0])
+        if len(value) != 0:
+            for i in range(len(value)):
+                found_values.append(value[i])
 
         # found_links = list(filter(lambda x: name in x, links_list))
         # print(found_links)
