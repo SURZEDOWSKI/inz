@@ -9,7 +9,7 @@ from scraper import scrape_prices_from_pages, find_player_by_name
 
 # os.chdir(r".\yolov5")
 
-pip.main(["install", "-r", "requirements.txt"])
+#pip.main(["install", "-r", "requirements.txt"])
 
 print(torch.cuda.is_available())
 print(torch.__version__)
@@ -80,7 +80,7 @@ def print_text(results, frame):
     return card_text
 
 
-def main(img_path=None, vid_path=None):
+def main(dictionary_links_values, links_list, img_path=None, vid_path=None):
     model = torch.hub.load(".", "custom", "best.pt", source="local")
     classes = model.names
 
@@ -88,11 +88,11 @@ def main(img_path=None, vid_path=None):
         frame = cv2.imread(img_path)
         results = detect_cards(frame, model=model)
         final_product = print_text(results, frame)
-        # print(final_product)
+        #print(final_product)
         found_links, found_values = find_player_by_name(
-                    dictionary_links_values, links_list, *final_product
-                )
-        print(found_links, found_values)
+            dictionary_links_values, links_list, *final_product
+        )
+        #print(found_links, found_values)
         #return final_product
         return found_links, found_values
 
@@ -106,14 +106,14 @@ def main(img_path=None, vid_path=None):
         # assert cap.isOpened()
         frame_no = 1
 
-        cv2.namedWindow("vid_out", cv2.WINDOW_NORMAL)
+        cv2.namedWindow("press 'q' to exit", cv2.WINDOW_NORMAL)
         final_links=[]
         final_prices=[] 
         final_product = []
         while True:
             ret, frame = cap.read()
             if ret and frame_no % 1 == 0:
-                print(f"[INFO] Working with frame {frame_no} ")
+                #print(f"[INFO] Working with frame {frame_no} ")
 
                 results = detect_cards(frame, model=model)
 
@@ -123,8 +123,8 @@ def main(img_path=None, vid_path=None):
                 found_links, found_values = find_player_by_name(
                     dictionary_links_values, links_list, *final_product
                 )
-                print(found_links, found_values)
-                if len(found_links) is not 0:
+                #print(found_links, found_values)
+                if len(found_links) != 0:
                     for i in range(len(found_links)):
                         if found_links[i] not in final_links:
                             final_links.append(found_links[i])
@@ -136,7 +136,7 @@ def main(img_path=None, vid_path=None):
                 #            final_product.append(found_text)
 
                 # print(final_product)
-                cv2.imshow("vid_out", frame)
+                cv2.imshow("press 'q' to exit", frame)
 
                 if cv2.waitKey(5) & 0xFF == ord("q"):
                     break
@@ -149,13 +149,15 @@ def main(img_path=None, vid_path=None):
         return final_links, final_prices
 
 
-"""if __name__ == "__main__":
 
-    dictionary_links_values, links_list = scrape_prices_from_pages(10)
-    final_links, final_prices = main(vid_path=0)
-    #final_links, final_prices = main(
-    #   img_path="C:/Users/Wazon/Desktop/code/python/inz/dataset/val/images/34d47d2c-Zrzut_ekranu_2022-12-12_221430.png"
-    #)
+
+if __name__ == "__main__":
+
+    dictionary_links_values, links_list = scrape_prices_from_pages(3, 1)
+    #final_links, final_prices = main(vid_path=0)
+    final_links, final_prices = main(dictionary_links_values, links_list,
+       img_path="C:/Users/Wazon/Desktop/code/python/inz/dataset/val/images/a437a811-Zrzut_ekranu_2022-12-12_221502.png"
+    )
     #print(final_product)
     # for item in range(len(final_product)):
     #    found_links, found_values = find_player_by_name(dictionary_links_values, links_list, final_product[item])
@@ -168,4 +170,3 @@ def main(img_path=None, vid_path=None):
 
 
 # main(vid_path=0)
-"""
