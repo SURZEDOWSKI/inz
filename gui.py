@@ -158,6 +158,8 @@ class App(customtkinter.CTk):
                 error_handler(5)
                 return 0
 
+            combined_price = 0
+
             for i in range(len(final_links)):
                 name = re.findall("[a-zA-Z-]{3,}", final_links[i])
                 self.textbox_dict.insert(
@@ -167,6 +169,20 @@ class App(customtkinter.CTk):
                 self.textbox_dict.insert(
                     END,
                     f" :: link: www.futwiz.com{final_links[i]}\n",
+                )
+
+                if final_prices[i][-1] == "K":
+                    final_prices[i] = final_prices[i][:-1]
+                    full_price = float(final_prices[i])
+                    full_price = full_price * 1000
+                elif final_prices[i][-1] == "0":
+                    full_price = float(final_prices[i])
+
+                combined_price = combined_price + full_price
+
+            self.textbox_dict.insert(
+                    END,
+                    f"COMBINED VALUE OF ALL DETECTED PLAYERS: {combined_price}\n",
                 )
 
             self.textbox_dict.configure(state="disabled")
@@ -188,6 +204,8 @@ class App(customtkinter.CTk):
                 error_handler(5)
                 return 0
 
+            combined_price = 0
+
             for i in range(len(final_links)):
                 name = re.findall("[a-zA-Z-]{3,}", final_links[i])
                 self.textbox_dict.insert(
@@ -197,6 +215,20 @@ class App(customtkinter.CTk):
                 self.textbox_dict.insert(
                     END,
                     f" :: link: www.futwiz.com{final_links[i]}\n",
+                )
+
+                if final_prices[i][-1] == "K":
+                    final_prices[i] = final_prices[i][:-1]
+                    full_price = float(final_prices[i])
+                    full_price = full_price * 1000
+                elif final_prices[i][-1] == "0":
+                    full_price = float(final_prices[i])
+
+                combined_price = combined_price + full_price
+
+            self.textbox_dict.insert(
+                    END,
+                    f"COMBINED VALUE OF ALL DETECTED PLAYERS: {combined_price}\n",
                 )
                 
             self.textbox_dict.configure(state="disabled")
