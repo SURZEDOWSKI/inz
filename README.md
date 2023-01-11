@@ -73,7 +73,7 @@ $ conda create -n card_detection python=3.9.15
 $ conda activate card_detection
 
 # Install requirements from pip
-$ pip install -r requirements.py
+$ pip install -r requirements.txt
 
 # Install pytorch and cuda from conda
 $ conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
