@@ -61,7 +61,7 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com),  
 
 ```bash
 # Clone this project
-$ git clone -- single-branch --branch main https://github.com/SURZEDOWSKI/inz 
+$ git clone --single-branch --branch main https://github.com/SURZEDOWSKI/inz 
 
 # Access
 $ cd inz
