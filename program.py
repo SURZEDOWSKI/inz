@@ -4,6 +4,7 @@ import torch  # YOLOv5 implemented using pytorch
 import easyocr
 import cv2
 import pip
+import sys
 
 from scraper import scrape_prices_from_pages, find_player_by_name
 
@@ -12,6 +13,7 @@ from scraper import scrape_prices_from_pages, find_player_by_name
 
 print(torch.cuda.is_available())
 print(torch.__version__)
+sys.path.insert(0, './yolov5')
 
 EASY_OCR = easyocr.Reader(["en"], gpu=True)
 
