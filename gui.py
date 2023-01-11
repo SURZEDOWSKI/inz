@@ -20,13 +20,13 @@ class App(customtkinter.CTk):
         self.geometry("1200x800")
 
         def error_handler(num):
-            if num == 0: # not entered num of pages to pull 
+            if num == 0:  # not entered num of pages to pull
                 self.textbox_dict.insert(
                     END, "||=== ENTER NUMBER OF PAGES TO PULL! ===||\n", "warning"
                 )
                 self.textbox_dict.configure(state="disabled")
-            
-            elif num == 1: # not pulled data yet
+
+            elif num == 1:  # not pulled data yet
                 self.textbox_dict.insert(
                     END,
                     "|===| PULL PRICES BEFORE SEARCHING FOR PLAYERS! |===|\n",
@@ -34,28 +34,26 @@ class App(customtkinter.CTk):
                 )
                 self.textbox_dict.configure(state="disabled")
 
-            elif num == 2: # no matches
-                self.textbox_dict.insert(
-                    END, "|===| NO MATCHES! |===|\n", "warning"
-                )
+            elif num == 2:  # no matches
+                self.textbox_dict.insert(END, "|===| NO MATCHES! |===|\n", "warning")
                 self.textbox_dict.insert(
                     END, "Try other name or try pulling more prices...\n", "warning"
                 )
                 self.textbox_dict.configure(state="disabled")
 
-            elif num == 3: # not enough characters
+            elif num == 3:  # not enough characters
                 self.textbox_dict.insert(
                     END, "|===| ENTER AT LEAST 3 LETTERS! |===|\n", "warning"
                 )
                 self.textbox_dict.configure(state="disabled")
-            
-            elif num == 4: # no. pages is not a int
+
+            elif num == 4:  # no. pages is not a int
                 self.textbox_dict.insert(
                     END, "|===| NO. PAGES MUST BE A NUMBER! |===|\n", "warning"
                 )
                 self.textbox_dict.configure(state="disabled")
 
-            elif num == 5: # no detections on img
+            elif num == 5:  # no detections on img
                 self.textbox_dict.insert(
                     END, "|===| NO DETECTIONS ON IMAGE! |===|\n", "warning"
                 )
@@ -70,7 +68,7 @@ class App(customtkinter.CTk):
             if not num_of_pages:
                 error_handler(0)
                 return 0
-            
+
             try:
                 num_of_pages = int(num_of_pages)
             except ValueError:
@@ -164,7 +162,8 @@ class App(customtkinter.CTk):
                 name = re.findall("[a-zA-Z-]{3,}", final_links[i])
                 self.textbox_dict.insert(
                     END,
-                    f"{name[2].upper()}: {final_prices[i]}", "result",
+                    f"{name[2].upper()}: {final_prices[i]}",
+                    "result",
                 )
                 self.textbox_dict.insert(
                     END,
@@ -181,9 +180,9 @@ class App(customtkinter.CTk):
                 combined_price = combined_price + full_price
 
             self.textbox_dict.insert(
-                    END,
-                    f"COMBINED VALUE OF ALL DETECTED PLAYERS: {combined_price}\n",
-                )
+                END,
+                f"COMBINED VALUE OF ALL DETECTED PLAYERS: {combined_price}\n",
+            )
 
             self.textbox_dict.configure(state="disabled")
 
@@ -210,7 +209,8 @@ class App(customtkinter.CTk):
                 name = re.findall("[a-zA-Z-]{3,}", final_links[i])
                 self.textbox_dict.insert(
                     END,
-                    f"{name[2].upper()}: {final_prices[i]}", "result",
+                    f"{name[2].upper()}: {final_prices[i]}",
+                    "result",
                 )
                 self.textbox_dict.insert(
                     END,
@@ -227,10 +227,10 @@ class App(customtkinter.CTk):
                 combined_price = combined_price + full_price
 
             self.textbox_dict.insert(
-                    END,
-                    f"COMBINED VALUE OF ALL DETECTED PLAYERS: {combined_price}\n",
-                )
-                
+                END,
+                f"COMBINED VALUE OF ALL DETECTED PLAYERS: {combined_price}\n",
+            )
+
             self.textbox_dict.configure(state="disabled")
 
         self.frame = customtkinter.CTkFrame(master=self, corner_radius=15)
@@ -252,7 +252,11 @@ class App(customtkinter.CTk):
         self.label_scrape.grid(pady=6, padx=10, column=0, row=0)
 
         self.entry_pages = customtkinter.CTkEntry(
-            master=self.frame, placeholder_text="no. pages", fg_color='silver', placeholder_text_color='#40403f', text_color='black'
+            master=self.frame,
+            placeholder_text="no. pages",
+            fg_color="silver",
+            placeholder_text_color="#40403f",
+            text_color="black",
         )
         self.entry_pages.grid(pady=6, padx=10, column=0, row=1)
 
@@ -292,7 +296,11 @@ class App(customtkinter.CTk):
         self.label_find.grid(pady=6, padx=10, column=1, row=0)
 
         self.entry_name = customtkinter.CTkEntry(
-            master=self.frame, placeholder_text="name", fg_color='silver', placeholder_text_color='#40403f', text_color='black'
+            master=self.frame,
+            placeholder_text="name",
+            fg_color="silver",
+            placeholder_text_color="#40403f",
+            text_color="black",
         )
         self.entry_name.grid(pady=6, padx=10, column=1, row=1)
 
@@ -307,7 +315,8 @@ class App(customtkinter.CTk):
         self.label_detect_img.grid(pady=6, padx=10, column=2, row=0)
 
         self.entry_detect_img = customtkinter.CTkEntry(
-            master=self.frame, placeholder_text="path",
+            master=self.frame,
+            placeholder_text="path",
         )
         self.entry_detect_img.configure(state="disabled")
         self.entry_detect_img.grid(pady=6, padx=10, column=2, row=1)
@@ -323,7 +332,8 @@ class App(customtkinter.CTk):
         self.label_detect_cam.grid(pady=6, padx=10, column=3, row=0)
 
         self.entry_detect_cam = customtkinter.CTkEntry(
-            master=self.frame, placeholder_text="camera no.",
+            master=self.frame,
+            placeholder_text="camera no.",
         )
         self.entry_detect_cam.configure(state="disabled")
         self.entry_detect_cam.grid(pady=6, padx=10, column=3, row=1)
@@ -331,7 +341,7 @@ class App(customtkinter.CTk):
         self.button_detect_cam = customtkinter.CTkButton(
             master=self.frame, text="DETECT", command=detect_cam, hover_color="#3377FF"
         )
-        self.button_detect_cam.grid(pady=6, padx=10, column=3, row=2)  
+        self.button_detect_cam.grid(pady=6, padx=10, column=3, row=2)
 
         self.frame_textbox_dict = customtkinter.CTkFrame(master=self, corner_radius=15)
         self.frame_textbox_dict.pack(pady=20, padx=50, fill="both", expand=True)
