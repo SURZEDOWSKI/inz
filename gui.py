@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import filedialog as fd
 
-# import tkinter as tk
 import customtkinter
 import re
 
@@ -86,7 +85,6 @@ class App(customtkinter.CTk):
             for key in dictionary_links_values:
                 name = re.findall("[a-zA-Z-]{3,}", key)
                 insert_dict_string = name[2] + ": " + dictionary_links_values[key]
-                # textbox_dict.insert("0.0", (key, " : ", dictionary_links_values[key], "\n"))
                 self.textbox_dict.insert(END, f"{insert_dict_string}\n")
 
             self.textbox_dict.configure(state="disabled")
@@ -112,16 +110,13 @@ class App(customtkinter.CTk):
                 matching_values = [
                     value for key, value in dictionary.items() if name in key.lower()
                 ]
-                # print(matching_values)
                 link = list(filter(lambda x: name in x, links))
-                # print(link)
                 if len(link) == 0:
                     error_handler(2)
                 else:
                     for i in range(len(link)):
 
                         li = re.findall("[a-zA-Z-]{3,}", link[i])
-                        # print(li[2], matching_values[i])
                         insert_dict_string = li[2] + ": " + matching_values[i]
                         self.textbox_dict.insert(END, f"{insert_dict_string}\n")
 
@@ -239,8 +234,6 @@ class App(customtkinter.CTk):
         self.title("FIFA 23 PRICE DETECTION")
         self.minsize(800, 500)
 
-        # self.frame.grid_rowconfigure(0, weight=1)
-        # self.frame.grid_columnconfigure(0, weight=1, uniform="fred")
         self.frame.grid_columnconfigure((0, 0), weight=1, uniform="fred")
         self.frame.grid_columnconfigure((1, 0), weight=1, uniform="fred")
         self.frame.grid_columnconfigure((2, 0), weight=1, uniform="fred")
@@ -364,7 +357,6 @@ class App(customtkinter.CTk):
         self.textbox_dict.configure(state="disabled")
         self.textbox_dict.tag_config("warning", foreground="red")
         self.textbox_dict.tag_config("result", foreground="green")
-        # textbox_dict.grid(row=0, column=0)
         self.textbox_dict.pack(pady=12, padx=10)
 
         self.scrollbar_textbox_dict.configure(command=self.textbox_dict.yview)

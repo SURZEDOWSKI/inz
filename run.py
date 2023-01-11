@@ -1,4 +1,6 @@
 import os
 import customtkinter
 
-os.system('cmd /k "python gui.py"')
+if __name__ == "__main__":
+
+    os.system('cmd /k "python gui.py"')
