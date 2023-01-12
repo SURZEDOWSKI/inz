@@ -77,6 +77,8 @@ $ pip install -r requirements.txt
 
 # Install pytorch and cuda from conda
 $ conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+# if previous command doesn't work or you want to run pytorch on your CPU use:
+$ conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cpuonly -c pytorch
 
 # Run the project
 $ python run.py
