@@ -69,9 +69,17 @@ def print_text(results, frame):
 
             coords = [x1, y1, x2, y2]
 
-            card_text.append(
-                recognize_card_easyocr(img=frame, coords=coords, reader=EASY_OCR)
-            )
+            detection = recognize_card_easyocr(img=frame, coords=coords, reader=EASY_OCR)
+            if detection is not None:
+                edited_detection = detection.upper()
+            else:
+                edited_detection = detection
+
+            card_text.append(edited_detection)
+
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2) ## BBox
+            cv2.rectangle(frame, (x1, y1-20), (x2, y1), (0, 255,0), -1) ## for text label background
+            cv2.putText(frame, f"{edited_detection}", (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255), 2)
 
     return card_text
 
